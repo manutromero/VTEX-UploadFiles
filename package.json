@@ -4,7 +4,9 @@
     "description": "",
     "main": "login.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "backup": "node --unhandled-rejections=none backup.js",
+        "deployer": "node --unhandled-rejections=none deployer.js"
     },
     "author": "",
     "license": "ISC",

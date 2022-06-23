@@ -11,14 +11,14 @@ function deploy() {
         token = await auth.promptToken(true);
 
         if (!fs.pathExistsSync("./dist")) {
-            console.log("You must build the app before upload");
+            console.warn("WARNING: -- You need created a folder /dist with your files upload --");
             return;
         }
 
         await uploadFiles();
         //uploadLayouts();
 
-        console.log("Backup completed");
+        console.log("Deployment completed");
     })();
 }
 
@@ -70,7 +70,8 @@ async function uploadFiles() {
         return await(Promise.all(uploadFilesPromise));
     }
     catch (err) {
-        console.error(`Error on load files list: ${err}`);
+     
+        console.error(`Error on load files list: ${err.error.error.message}`);
     }
 }
 

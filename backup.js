@@ -9,7 +9,6 @@ let token;
 
 function backup() {
     return (async function () {
-        // token = await auth.getCookieToken(true);
         token = await auth.promptToken(true);
 
         fs.emptyDirSync("./backup");
@@ -25,6 +24,8 @@ async function backupFiles() {
     console.log("Initializing files backup");
     try{
         const account = await auth.promptAccount(true);
+
+
         let files = await(request({
             method: "get",
             url: `https://${account}.myvtex.com/api/portal/pvt/sites/default/files`,
@@ -55,7 +56,8 @@ async function backupFiles() {
         });
     }
     catch(err){
-        console.error(`Error on load files list: ${err}`);
+       
+        console.error(`Error on load files list: ${err.error.error.message}`);
     }
 }
 
@@ -111,7 +113,7 @@ async function backupPortalTemplates() {
         });
     }
     catch(err){
-        console.error(`Error on load Portal templates list: ${err}`);
+        console.error(`Error on load Portal templates list: ${err.statusCode}`);
     }
 }
 
